@@ -1,4 +1,4 @@
-using ExpenseTracker.Data;
+﻿using ExpenseTracker.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +35,9 @@ namespace ExpenseTracker
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddDbContext<ExpenseTrackerContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ExpenseTrackerContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
